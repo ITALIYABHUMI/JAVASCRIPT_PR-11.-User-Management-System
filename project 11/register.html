@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/output.css">
+</head>
+
+<body>
+
+    <div class="container h-screen  mx-auto">
+        <div class="flex p-3 flex-auto mx-auto h-screen  flex-row">
+            <div
+                class="xl:basis-1/3 lg:basis-2/3 md:basis-8/12 basis-full mx-auto h-fit self-center drop-shadow-xl rounded-md bg-white p-6">
+                <h4 class="text-xl text-center pb-5 font-bold text-gray-500"> register Page</h4>
+                <form>
+                    <div class="mb-6">
+                        <label for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">name</label>
+                        <input type="text" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="name" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
+                            address</label>
+                        <input type="email" id="email"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="john.doe@company.com" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <input type="password" id="password"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="•••••••••" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <input type="password" id="c_password"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="•••••••••" required>
+                    </div>
+                    <button type="submit" onclick="save()"
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">sign
+                        to your account</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        let data = [{
+            id: 1,
+            name: 'bhumi',
+            email: 'bhumi@gmail.com',
+            password: 123,
+            c_password: 123,
+            role: 'admin'
+        }];
+
+        const save = () => {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let c_password = document.getElementById('c_password').value;
+
+
+            if (password == c_password) {
+                let obj = {
+                    id:Math.floor(Math.random()*1000),
+                    name: name,
+                    email: email,
+                    password: password,
+                    c_password:c_password,
+                    role:'user'
+                };
+
+                if ((localStorage.getItem('register')) === null || (localStorage.getItem('register')) === undefined  ) {
+                    data.push(obj);
+                    localStorage.setItem('register', JSON.stringify(data));
+                }
+                else {
+                    let val = JSON.parse(localStorage.getItem('register'));
+                    val.push(obj);
+                    localStorage.setItem('register', JSON.stringify(val));
+                }
+
+                alert('user  sucessfylly added');
+                document.getElementById('name').value = "";
+                document.getElementById('email').value = "";
+                document.getElementById('password').value = "";
+                document.getElementById('c_password').value = "";
+                window.location.href = "login.html";
+            }
+            else {
+                console.log("password is not valid");
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
